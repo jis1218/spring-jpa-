@@ -577,3 +577,77 @@ public void givenUserDoesNotExists_whenUserInfoIsRetrieved_then404IsReceived()
 	}
 ```
 
+##### Spring에서는 IoC 컨테이너(빈 컨테이너)를 이용해 빈 객체를 관리한다. ApplicationContext 인터페이스의 구현체를 통해 빈을 자동 생성함
+##### Spring Boot 전에는 다음과 같이 ApplicationContext 인터페이스의 구현체인 context 클래스에서 빈을 가져왔음
+##### 아래 예시는 xml에 빈을 등록 후 ClassPathXmlApplicationContext를 통해 빈을 가져오는 방법임
+```java
+ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("exam/test21/beans.xml");
+Car car = (Car) ctx.getBean("car");
+```
+##### Spring Boot의 경우에는 @Configuration이 붙은 곳에서 @Bean을 통해 빈을 생성할 수 있음, 정확히 말하면 Spring 3.0 이상에서임
+```java
+@Configuration
+public class AccountConfig {
+
+  @Bean
+  public AccountService accountService() {
+    return new AccountService(accountRepository());
+  }
+```
+
+##### Baeldung에 다음과 같은 글이 있다. https://www.baeldung.com/spring-application-context
+##### Furthermore, it provides more enterprise-specific functionalities. The important features of ApplicationContext are resolving messages, supporting internationalization, publishing events, and application-layer specific contexts. This is why we use it as the default Spring container.
+
+##### So, should we configure all the objects of our application as Spring beans? Well, as a best practice, we should not. As per Spring documentation, in general, we should define beans for service layer objects, data access objects (DAOs), presentation objects, infrastructure objects such as Hibernate SessionFactories, JMS Queues, and so forth.
+
+##### @SpringBootApplication에 대해서 알아보자 https://jhkang-tech.tistory.com/44
+
+##### 예를 들어 다음과 같은 클래스가 있다고 하자
+```java
+
+@Data
+public class SequenceGenerator{
+	private string prefix;
+	private int initial;
+
+	public String getSequence(0{
+		StringBuilder builder = new StringBuilder();
+		builder.append(prefix).append(initial);
+		return builder.toString();
+	})
+}
+```
+
+##### 어떤 객체를 bean으로 등록하기 위해서는 @Configuration을 붙인 클래스를 만들어주고 그 안에 @Bean을 붙어 등록한다.
+
+```java
+@Configuration
+public class SequenceGeneratorConfiguration{
+
+	@Bean
+	public SequenceGenerator sequenceGenerator(){
+		SequenceGenerator seqgen = new SequenceGenerator();
+		seqgen.setPrefix("30");
+		seqgen.setInital("100");
+		return seqgen;
+	}
+}
+```
+##### 그럼 어떻게 컨테이너를 초기화하고 Annotation을 초기화하느냐? Annotation을 붙인 자바 클래스를 스캐닝하려면 우선 IoC컨테이너를 인스턴스화 해야 한다.
+##### @Configuration, @Component를 찾을 수 있는 ApplicationContext의 구현체인 AnnotationConfigApplicationContext를 인스턴스화 한다.
+```java
+ApplicationContext context = new AnnotationConfigApplicationContext(SequenceGeneratorConfiguration.class);
+
+SequeunceGenerator generator = (SequenceGenerator) context.getBean("SequenceGenerator");
+//or
+// SequeunceGenerator generator = context.getBean("SequenceGenerator", SequenceGenerator.class);
+
+System.out.println(generator.getSequence()); // 30100
+```
+
+##### 좋은 사이트인듯?
+https://atoz-develop.tistory.com/entry/Spring-Autowired-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC-BeanPostProcessor?category=869243
+
+
+
+
