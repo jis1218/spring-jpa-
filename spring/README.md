@@ -649,5 +649,12 @@ System.out.println(generator.getSequence()); // 30100
 https://atoz-develop.tistory.com/entry/Spring-Autowired-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC-BeanPostProcessor?category=869243
 
 
+##### AOP(Aspect Oriented Programming) 관점 지향 프로그래밍 https://engkimbs.tistory.com/746
+##### Spring AOP는 1. JDK 동적 프록시 2. CGLIB을 활용하여 AOP 제공
+##### https://gmoon92.github.io/spring/aop/2019/01/15/aspect-oriented-programming-concept.html
+##### Spring AOP는 메서드 단위
+##### Filter, Interceptor, AOP 차이 https://goddaehee.tistory.com/154
+
+
 
 
