@@ -655,6 +655,9 @@ https://atoz-develop.tistory.com/entry/Spring-Autowired-%EB%8F%99%EC%9E%91-%EC%9
 ##### Spring AOP는 메서드 단위
 ##### Filter, Interceptor, AOP 차이 https://goddaehee.tistory.com/154
 
+##### Spring Introduction
+##### https://stackoverflow.com/questions/60221207/how-does-spring-declareparents-annotation-work-how-does-it-implement-the-metho
+
 
 
 
