@@ -658,6 +658,45 @@ https://atoz-develop.tistory.com/entry/Spring-Autowired-%EB%8F%99%EC%9E%91-%EC%9
 ##### Spring Introduction
 ##### https://stackoverflow.com/questions/60221207/how-does-spring-declareparents-annotation-work-how-does-it-implement-the-metho
 
+##### Thread
+##### ExecutorService는 JDK API
+##### Executors라는 팩토리 클래스를 이용하여 Class 생성
+
+##### ExecutorService.submit을 하게 되면 result트로 Future Interface형의 결과를 반환
+##### Callable일 경우 result를 반환하고 Runnable일 경우 null 반환
+##### https://www.baeldung.com/java-executor-service-tutorial
+
+##### CachedThreadPool
+##### If there is an idle thread waiting on the queue, then the task producer hands off the task to that thread. Otherwise, since the queue is always full, the executor creates a new thread to handle that task.        
+
+##### FixedThreadPool
+##### Therefore, instead of an ever-increasing number of threads, the fixed thread pool tries to execute incoming tasks with a fixed amount of threads.
+
+##### SingleThreadExecutor
+##### 단일 쓰레드로 동작하는 Executor
+
+##### ScheduledThreadPool
+##### 일정 시간 이후에 실행하거나 주기적으로 작업을 실행
+
+##### proxy pattern을 사용할 때 좋은 점?
+##### 1. 객체 생성 시 많은 자원이 들 때 - 즉 필요할 때만 initialization하면 되므로 성능이 좋아짐
+##### 2. Proxy를 캐쉬 개념으로 사용할 수 있다.
+
+##### proxy를 사용하는 spring의 예들 : Transactions, Caching, Java Configuration
+##### https://spring.io/blog/2012/05/23/transactions-caching-and-aop-understanding-proxy-usage-in-spring
+##### https://velog.io/@gwontaeyong/Spring-AOP%EC%97%90%EC%84%9C-Proxy%EB%9E%80
+
+##### 왜 프록시 패턴을 사용하나?
+
+##### 스프링부트에 h2 설정하는 방법
+##### https://kamang-it.tistory.com/entry/H2%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0%EB%AA%A8%EB%93%9C-%ED%8F%AC%ED%8A%B8
+
+##### h2를 localhost에 띄워 tcp로 접근할 때 에러가 뜬다.
+##### url: jdbc:h2:tcp://localhost:10080/~/localadmin
+
+##### https://www.inflearn.com/questions/11283
+##### http://www.h2database.com/html/tutorial.html#creating_new_databases
+
 
 
 
