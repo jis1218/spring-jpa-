@@ -697,6 +697,10 @@ https://atoz-develop.tistory.com/entry/Spring-Autowired-%EB%8F%99%EC%9E%91-%EC%9
 ##### https://www.inflearn.com/questions/11283
 ##### http://www.h2database.com/html/tutorial.html#creating_new_databases
 
+## 스프링 MVC
+
+##### MVC 프레임워크에서 모든 웹 요청은 반드시 Dispatcher Servlet을 거쳐 처리됨
+
 
 
 

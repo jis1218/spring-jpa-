@@ -212,3 +212,44 @@ function submitClick(){
 ##### REPEATABLE READ
 ##### SERIALIZABLE
 ##### https://joont92.github.io/db/%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EA%B2%A9%EB%A6%AC-%EC%88%98%EC%A4%80-isolation-level/
+
+##### AbstractPersistable 클래스를 보면
+```java
+@MappedSuperclass
+public abstract class AbstractPersistable<PK extends Serializable> implements Persistable<PK> {
+
+	private static final long serialVersionUID = -5554308939380869754L;
+
+	@Id @GeneratedValue private @Nullable PK id;
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.springframework.data.domain.Persistable#getId()
+	 */
+	@Nullable
+	@Override
+	public PK getId() {
+		return id;
+	}
+
+	/**
+	 * Sets the id of the entity.
+	 *
+	 * @param id the id to set
+	 */
+	protected void setId(@Nullable PK id) {
+		this.id = id;
+	}
+
+	/**
+	 * Must be {@link Transient} in order to ensure that no JPA provider complains because of a missing setter.
+	 *
+	 * @see org.springframework.data.domain.Persistable#isNew()
+	 */
+	@Transient // DATAJPA-622
+	@Override
+	public boolean isNew() {
+		return null == getId();
+	}
+}
+```
