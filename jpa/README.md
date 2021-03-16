@@ -253,3 +253,20 @@ public abstract class AbstractPersistable<PK extends Serializable> implements Pe
 	}
 }
 ```
+
+### 트랜잭션
+##### @Test 어노테이션과 @Transactional 어노테이션을 함꼐 사용했을 경우 테스트가 끝나면 rollback 됨
+
+##### 기존의 spring-test와 동일
+##### 만약 롤백하고 싶지 않다면 아래와 같이 함
+```java
+@Test
+@Rollback(false)
+public void insetTest(){
+    // ...
+}
+```
+##### 하지만 webEnvironment의 RANDOM_PORT나 DEFINED_PORT로 테스트를 설정하면 테스트가 별도의 스레드에서 수행되기 때문에 rollback이 수행되지 않음
+##### https://joont92.github.io/spring/spring-boot-test/
+##### 관련해서 읽어볼만한 글
+##### https://stackoverflow.com/questions/46729849/transactions-in-spring-boot-testing-not-rolled-back
