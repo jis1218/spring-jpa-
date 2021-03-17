@@ -270,3 +270,82 @@ public void insetTest(){
 ##### https://joont92.github.io/spring/spring-boot-test/
 ##### 관련해서 읽어볼만한 글
 ##### https://stackoverflow.com/questions/46729849/transactions-in-spring-boot-testing-not-rolled-back
+
+##### many to many 관계에서 연관테이블을 놔뒀는데 insert가 안된다.
+##### 이유가 뭔지 찾기 위해 일단 JPA 책 8장을 살펴보자
+##### 일단 용어 정리
+##### 객체 그래프(object graph) : Objects have references to other objects which may in turn have references to more objects including the starting object. This creates a graph of objects, useful in reachability analysis.
+##### 객체는 객체 그래프로 연관되어 있는 객체를 탐색할 수 있음. 즉 객체에 레퍼런스 주소를 가지고 있으면 그 레퍼런스로 탐색이 가능하고 또 그 안에 레퍼런스가 있으면 또 가능하고
+##### 하지만 모든 객체에 대해서 데이터를 가져올 수는 없다. 그러면 비용이 많이 들것이다.
+##### 따라서 JPA 구현체들은 이 문제를 해결하기 위해 프록시 기술을 사용하였다.
+##### 프록시를 사용하면 연관된 객체를 처음부터 데이터베이스에서 조회하는 것이 아니라 실제 사용하는 시점에 데이터베이스에서 조회할 수 있음. 그래서 JPA는 즉시 로딩(eager)과 지연 로딩(lazy)을 지원한다.
+
+##### 그러면 프록시란 무엇인가?
+##### 일단 하이버네이트는 지연 로딩을 위해 프록시를 사용하는 방법과 바이트코드를 수정하는 두 가지 방법을 제공함
+##### 프록시 클래스는 실제 클래스를 상속(또는 인터페이스를 구현) 받아 만들어짐
+##### 프록시 객체는 실제 객체에 대한 참조를 보관. 그리고 프록시 객체의 메소드를 호출하면 프록시 객체는 실제 객체의 메서드를 호출
+##### 프록시 객체는 member.getName()처럼 실제 사용될 때 데이터베이스를 조회해서 실제 엔티티 객체를 생성하는데 이것을 프록시 객체의 초기화라고 한다.
+
+```java
+@Entity
+public class Memeber {
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "TEAM_ID")
+	private Team team;
+
+}
+```
+
+```java
+Member member = em.find(Member.class, "member1");
+Team team = member.getTeam(); //객체 그래프 탐색
+```
+##### FetchType.EAGER로 설정했으므로 team에 대한 탐색이 즉시 이루어진다.
+##### 쿼리는 두번 보내지 않고 join을 이용하여 한번만 날린다.
+##### Null 조건과 JPA 조인 전략
+##### 외래키가 Nullable이면 JPA는 left outer join을 사용
+##### 외래기카 Nullable = false 이면 inner join을 사용
+##### inner join이 성능과 최적화에서 더 유리하다.
+
+##### 근데 지연로딩을 하면 당연히 쿼리는 두번 나가게 된다.(마지막 한번은 필요할 때)
+##### 그리고 지연로딩을 하면 실제 엔티티 대신에 프록시로 조회하게 된다.
+
+##### 언제 Eager를 쓰고 Lazy를 쓸지는 잘 판단해야 하겠따.
+
+##### 하이버네이트는 엔티티를 영속 상태로 만들 때 엔티티에 컬렉션이 있으면 컬렉션을 추적하고 관리할 목적으로 원본 컬렉션을 하이버네이트가 제공하는 내장 컬렉션으로 변경하는데 이것을 컬렉션 래퍼라고 한다.
+##### 지연로딩을 할 때 컬렉션 래퍼가 지연로딩을 처리해줌, 프록시와 하는 방식은 같으므로 컬랙션 래퍼도 프록시라 할 수 있음
+```java
+member.getOrders()
+```
+##### 이것만 호출해서는 데이터베이스를 탐색하지 않는다.
+```java
+member.getOrders().get(0)
+```
+##### 이렇게 해야 한다.
+
+
+##### JPA 기본 페치(fetch) 전략
+##### @ManyToOne, @OneToOne : 즉시 로딩(FetchType.EAGER)
+##### @OneToMany, @ManyToMany : 지연 로딩(FetchType.LAZY)
+
+##### 특정 엔티티를 영속 상태로 만들 때 연관된 엔티티도 함께 영속 상태로 만들고 싶으면 영속성 전이(transitive persistence)를 이용한다.
+##### 즉 영속성 전이를 사용하면 부모 엔티티를 저장할 때 자식 엔티티도 함께 저장할 수 있음
+##### CascadeType.PERSIST로 설정하면 연관된 자식도 함께 persist 됨
+```java
+@Entity
+public class Parent{
+	@OneToMany(mappedBy = "parent", cascade = CascadeType.PERSIST)
+	private List<Child> children = new ArrayList<Child>();
+}
+
+Child child1 = new Child();
+
+Parent parent = new Parent();
+child1.setParent(parent); //Child table에 insert 됨
+```
+
+##### JPA는 부모 엔티티와 연관관계가 끊어진 자식 엔티티를 자동으로 삭제하는 기능을 제공하는데 이것을 고아 객체(ORPHAN)제거라 한다. 이 기능을 사용해서 부모 엔티티의 컬렉션에서 자식 엔티티의 참조만 제거하면 자식 엔티티가 자동으로 삭제된다.
+##### 즉 부모 엔티티를 삭제하게 되면 자식 엔터티에서는 FK를 가지고 있지만 참조할 수가 없다. 이를 orphan이라고 하는데 orphanRemoval = true로 설정하면 연관관계가 끊어졌을 때(부모를 제거했을 때) 자식도 같이 삭제가 
+
+##### 해답은 부모 엔티티를 save 해야한다는것
+
