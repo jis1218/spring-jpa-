@@ -353,3 +353,12 @@ child1.setParent(parent); //Child table에 insert 됨
 ##### 그러면 자식 테이블에서 데이터 먼저 삭제 되고(id로 조회 함)
 ##### 그 다음 부모 테이블 삭제 됨
 
+
+##### @Transactional에 관하여...
+##### https://mommoo.tistory.com/92
+
+##### Dynamic Proxy와 CGlib에 관하여
+##### https://yeti.tistory.com/225
+
+##### Java Reflection
+##### 객체를 통해 클래스의 정보를 분석해 내는 프로그램 기법
