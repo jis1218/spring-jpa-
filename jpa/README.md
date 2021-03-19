@@ -349,3 +349,7 @@ child1.setParent(parent); //Child table에 insert 됨
 
 ##### 해답은 @Service에 @Transactional을 붙여야 한다는것!!!!!!!!!!!!!!!!!!!!!!!!
 
+##### 1:N 관계에서 부모를 삭제하게 되면 자식에서 참조할 id가 없음(설정을 orphanRemove=true로 했을 경우)
+##### 그러면 자식 테이블에서 데이터 먼저 삭제 되고(id로 조회 함)
+##### 그 다음 부모 테이블 삭제 됨
+
