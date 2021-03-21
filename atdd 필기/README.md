@@ -249,8 +249,39 @@ public class LineTest{
 ##### 그래서 나온 방식이 JWT
 
 
+##### 미션하며 궁금한점
+```java
+    public List<String> getShortestPathList(WeightedMultigraph<String, DefaultWeightedEdge> graph,
+                                            Long source, Long target) throws NullPointerException {
+        return new DijkstraShortestPath(graph).getPath(source.toString(), target.toString()).getVertexList();
+    }
 
 
+    public int getShortestPathLength(WeightedMultigraph<String, DefaultWeightedEdge> graph,
+                                     Long source, Long target) throws NullPointerException {
+        return (int) new DijkstraShortestPath(graph)
+                .getPath(source.toString(), target.toString()).getWeight();
+    }
+
+	public void validateSourceTargetSame(Long source, Long target) throws SameSourceTargetException {
+        if (source == target) {
+            throw new SameSourceTargetException("출발역과 도착역이 같습니다");
+        }
+    }
+```
+##### validateSourceTargetSame코드를 서비스단에서 처리하는게 맞는가? 아니면 도메인단에서 처리하는게 맞는가?
+##### 도메인단에서 처리하면 같은 메서드가 두개가 들어감
+##### 그러지 말고 그래프를 만드는 과정에서 처리하자
+```java
+    public GraphPath<String, DefaultWeightedEdge> getGraphPath(WeightedMultigraph<String, DefaultWeightedEdge> graph, Long source, Long target){
+        validateSourceTargetSame(source, target);
+        GraphPath<String, DefaultWeightedEdge> graphPath = new DijkstraShortestPath(graph).getPath(source.toString(), target.toString());
+        validateSourceTargetReachable(graphPath);
+        return graphPath;
+    }
+```
+
+##### 궁금증 - 도메인과 서비스단 처리 기준이 무엇인가?
 
 
 
