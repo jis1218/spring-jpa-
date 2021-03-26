@@ -22,4 +22,11 @@
 
 10. Authentication 객체를 SecurityContext에 저장합니다.
 
+##### What is GenericFilterBean
+##### Simple base implementation of Filter which treats its config parameters (init-param entries within the filter tag in web.xml) as bean properties.
+
+##### There is no PasswordEncoder mapped for the id "null"
+##### https://blusky10.tistory.com/411
+##### password 값 앞에 {noop}을 붙여서 저장해야 한다.
+
 
