@@ -701,6 +701,69 @@ https://atoz-develop.tistory.com/entry/Spring-Autowired-%EB%8F%99%EC%9E%91-%EC%9
 
 ##### MVC 프레임워크에서 모든 웹 요청은 반드시 Dispatcher Servlet을 거쳐 처리됨
 
+##### @Controller를 붙이면 사용자의 요청이 왔을 때 등록된 View Resolver를 통해 사용자에게 text/html타입의 응답을 보내주게 된다. 이게 있어야 함
+```xml
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
+```
+
+##### 일반적으로 spring MVC는 http request와 response를 변환하기 위해 HttpMessageConverter 인터페이스를 사용한다.
+
+##### @RestController를 붙이면 사용자의 요청이 왔을 때 MessageConverter를 통해 application/json, text/plain등 알맞은 형태로 리턴한다.
+##### 스프링부트에서는 MappingJackson2HttpMessageConverter를 통해 application/json 컨텐츠 타입을 리턴
+##### 일반적으로 spring framework에서는 Spring MVC를 이용해서 컨트롤러에 값을 주고 받을 때는 HTTP 요청 프로퍼티를 분석하여 그에 따라 특정 클래스로 바인딩 되게끔 하고 특정 객체를 Model Object에 집어 넣어 View를 리턴하는 식으로 주고 받게 
+
+##### xml로 requestbody를 날리고 싶다면 어떻게? 아래의 의존성을 추가하면 된다.
+```xml
+	<dependency>
+		<groupId>com.fasterxml.jackson.dataformat</groupId>
+		<artifactId>jackson-dataformat-xml</artifactId>
+	</dependency>
+```
+```xml
+<DtoRequest> <!--여기에는 어떤 이름이 들어가든 상관 없음-->
+    <name>good</name>
+    <hey>jdue</hey>
+    <bye>bye</bye>
+</DtoRequest>
+```
+
+##### messageConverters에 다음과 같은 인자가 있음
+##### 1. ByteArrayHttpMessageConverter
+##### 2. StringHttpMessageConverter
+##### 3. StringHttpMessageConverter
+##### 4. ResourceHttpMessageConverter
+##### 5. ResourceRegionHttpMessageConverter
+##### 6. SourceHttpMessageConverter
+##### 7. AllEncompassingFormHttpMessageConverter
+##### 8. MappingJackson2HttpMessageConverter
+##### 9. MappingJackson2HttpMessageConverter
+##### 10. MappingJackson2XmlHttpMessageConverter
+##### 11. MappingJackson2XmlHttpMessageConverter
+
+##### 콘텐트협상 방법
+
+##### 1. url 끝에 확장자를 이용해 미디어타입을 결정하는 방법
+##### It's also worth mentioning that as of Spring Framework 5.2.4, the favorPathExtension(boolean) method is deprecated in order to discourage the use of path extensions for content negotiations.
+```java
+public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+    configurer.favorPathExtension(true).
+    favorParameter(false).
+    ignoreAcceptHeader(true).
+    useJaf(false).
+    defaultContentType(MediaType.APPLICATION_JSON); 
+}
+```
+
+##### 2. Accept 헤더를 보는 방법
+
+
+
+
+
+
 
 
 
