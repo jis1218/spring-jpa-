@@ -283,6 +283,21 @@ public class LineTest{
 
 ##### 궁금증 - 도메인과 서비스단 처리 기준이 무엇인가?
 
+##### 이걸 하면 request에 id와 password만 들어있음
+```java
+String result = new BufferedReader(new InputStreamReader(request.getInputStream()))
+                .lines().collect(Collectors.joining("\n"));
+```
+
+##### 궁금증 - 
+##### 왜 세션할 때랑 토큰할 때 저장하는 객체가 다른 것인가?
+
+----------------------------------------------
+
+##### 마이크로서비스 - 배포, 모니터링, 장애처리, 실제 데이터베이스에 저장되었을 때 일관성에 대한 보장, 분산 시스템에 대한 구축이 되어야 한다.
+##### MonolithFirst - 마이크로서비스는 유용한 아키텍처이지만 마이크로서비스 프리미엄(마이크로서비스를 위한 부가적인 요소들, 위험 요소들)이 발생하기 때문에 비용이 발생하므로 이것을 능가할 복잡한 시스템에서 유용하다.
+##### 따라서 모듈화가 잘된 Monolith를 고려해보자
+##### 복잡하지 않은 서비스에서는 Monolith가 나을 수도 있다.
 
 
 
