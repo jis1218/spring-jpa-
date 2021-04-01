@@ -29,4 +29,8 @@
 ##### https://blusky10.tistory.com/411
 ##### password 값 앞에 {noop}을 붙여서 저장해야 한다.
 
+##### jwt - 또한 CORS 한 문제를 완전히 해결할 수 있다. 아무 도메인에서나 토큰 값만 유효하면 정상적으로 요청이 처리되기 때문이다. https://devkingdom.tistory.com/113
+
+##### interceptor에서 return false하면 컨트롤러로 가지 않고 200이 떨어진다.
+##### redirect 하려면 response.sendRedirect(로그인 화면)을 하자
 

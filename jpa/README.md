@@ -362,3 +362,7 @@ child1.setParent(parent); //Child table에 insert 됨
 
 ##### Java Reflection
 ##### 객체를 통해 클래스의 정보를 분석해 내는 프로그램 기법
+
+
+##### 사용자 로그인 -> jwt 발급(TokenAuthenticationInterceptor)
+##### 사용자 즐겨찾기 -> 
