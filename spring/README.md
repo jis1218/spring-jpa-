@@ -759,6 +759,8 @@ public void configureContentNegotiation(ContentNegotiationConfigurer configurer)
 
 ##### 2. Accept 헤더를 보는 방법
 
+----------------------------------------------------------------------------
+##### MVC
 
 
 
