@@ -760,8 +760,31 @@ public void configureContentNegotiation(ContentNegotiationConfigurer configurer)
 ##### 2. Accept 헤더를 보는 방법
 
 ----------------------------------------------------------------------------
-##### MVC
+##### QueryDSL을 위해...
 
+
+##### 어떻게 해결?
+##### org.springframework.dao.InvalidDataAccessApiUsageException: Type cannot be null; nested exception is java.lang.IllegalArgumentException: Type cannot be null
+##### 일단 이렇게 하면 잘 안됨, Academy를 HashMap으로 cast 할 수 없다고 뜸
+```java
+@Procedure(name = "Academy.findUserByProcedure")
+    Academy findUserByProcedure(@Param("name_in") String name);
+```
+
+##### 그래서
+
+```java
+@Procedure(name = "Academy.findUserByProcedure")
+    HashMap<String, String> findUserByProcedure(@Param("name_in") String name);
+```
+##### 이렇게 했더니 map에 아무것도 안들어옴
+##### 결국 Query 어노테이션을 썼음
+```java
+@Query(value = "call FIND_USER(:name_in);", nativeQuery = true)
+    Academy findUserByProcedure(@Param("name_in") String name);
+```
+
+##### profile별로 entity 등록을 하고 싶다면 어떻게??
 
 
 
