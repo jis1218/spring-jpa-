@@ -785,7 +785,43 @@ public void configureContentNegotiation(ContentNegotiationConfigurer configurer)
 ```
 
 ##### profile별로 entity 등록을 하고 싶다면 어떻게??
+##### 일단 @ConditionalOnProperty는 Service나 Controller 빈 등록할 때는 작동한다.
+```java
+@Service
+@ConditionalOnProperty(prefix = "module", value = "enabled", havingValue = "false")
+public class SimulationService {
+}
+```
+```yml
+module:
+  enabled: true
+```
+##### Stackoverflow에 나온 내용을 보자
+##### https://stackoverflow.com/questions/45978489/workaround-for-use-of-conditionalonproperty-on-entity
+##### https://www.baeldung.com/spring-entityscan-vs-componentscan
 
+##### 먼저 
+```java
+@EntityScan(basePackages = {"com.example.querydsl.domain"})
+```
+##### 이런식으로 하면 해당 클래스에 있는 엔터티만 Scan이 되어 빈 등록이 된다.
+##### 하지만 이렇게 되면 프로파일이 바뀔 때마다 주석처리를 해야한다.
+##### 그러나 방법은 없는것 같이 보였으나
+##### https://stackoverflow.com/questions/63089816/spring-data-jpa-disable-entity-based-on-configuration
+
+##### 자꾸 Members 클래스에서 에러가 난다.
+##### Interceptor 또는 Filter와 관련이 있는 듯 하다.
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------
+##### Spring 5 Recipie
+##### Spring-boot-starter-security를 추가해야함
+##### httpBasic
+##### Client에서 Header에 Authorization : Basic
 
 
 
