@@ -823,6 +823,73 @@ module:
 ##### httpBasic
 ##### Client에서 Header에 Authorization : Basic
 
+---------------------------------------------------------------------
+##### ObjectMapper로 readValue 할 때 UnrecognizedPropertyException이 뜬다
+```java
+    @Override
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+        final UsernamePasswordAuthenticationToken authRequest;
+        try{
+            final Members members = new ObjectMapper().readValue(request.getInputStream(), Members.class);
+            authRequest = new UsernamePasswordAuthenticationToken(members.getUsername(), members.getPassword());
+        }catch(IOException e){
+            throw new RuntimeException();
+        }
+        setDetails(request, authRequest);
+        return this.getAuthenticationManager().authenticate(authRequest);
+    }
+```
+##### MemberRequest에서 Authority의 변수명이 authority였음, 그래서 매핑이 안된듯
+```java
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        ArrayList<GrantedAuthority> auth = new ArrayList<>();
+        auth.add(new SimpleGrantedAuthority(authorities.toString()));
+        return auth;
+    }
+```
+##### https://zgundam.tistory.com/49
+
+##### Spring Security GrantedAuthority가 empty 일떄
+
+##### jwt와 로그인의 혼용
+```java
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        //헤더에서 토큰 추출
+        String authHeader = request.getHeader("Authorization");
+        if(authHeader==null){
+			//헤더에 토큰이 없으면 로그인을 하게 한다.
+            filterChain.doFilter(request, response);
+            return;
+        }
+        String bearerToken = JwtTokenProvider.getTokenFromHeader(authHeader);
+
+        if(JwtTokenProvider.isValidToken(bearerToken)){
+            Authentication authentication = jwtTokenProvider.getAuthentication(bearerToken);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        }
+    }
+```
+
+##### Refresh Token 발행
+
+Below are the steps to do revoke your JWT access token:
+
+1. When you do log in, send 2 tokens (Access token, Refresh token) in response to the client.
+2. The access token will have less expiry time and Refresh will have long expiry time.
+3. The client (Front end) will store refresh token in his local storage and access token in cookies.
+4. The client will use an access token for calling APIs. But when it expires, pick the refresh token from local storage and call auth server API to get the new token.
+5. Your auth server will have an API exposed which will accept refresh token and checks for its validity and return a new access token.
+6. Once the refresh token is expired, the User will be logged out.
+
+##### ClassCastException
+##### https://www.baeldung.com/java-classcastexception
+
+##### 미션 하며 느낀점
+1. 커밋 메시지
+2. 랜덤 함수
+3. 어떻게 하면 좋은 코드를 짤 수 있을까? 엄청 신경쓰면서 짜고 있음
 
 
 
