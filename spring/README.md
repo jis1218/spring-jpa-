@@ -893,6 +893,29 @@ Below are the steps to do revoke your JWT access token:
 4. MVC에 따른 기능 분리
 5. 인덴트, 10줄 안넘는 것 지키는 것
 
+##### Table 만들 때 에러가 계속 남
+```sql
+create table tb_question_answer (
+       id bigint not null,
+        regdt timestamp,
+        upddt timestamp,
+        regrid varchar(255),
+        updrid varchar(255),
+        useyn char(255),
+        next_question_id varchar(255),
+        order integer,
+        answer_id varchar(255),
+        symptom_question_id bigint,
+        primary key (id)
+    )"
+```
+
+##### order가 아마 sql에서 사용하는 단어라서 그런 것 같다.
+##### column name에 order라고 적었더니 에러가 발생함
+```java
+    @Column(name = "answer_order")
+    private int answerOrder;
+```
 
 
 
