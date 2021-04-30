@@ -926,3 +926,28 @@ create table tb_question_answer (
 
 
 
+##### 이런 에러가 뜬다. 왜? composite key를
+```
+java.lang.IllegalArgumentException: Can not set kr.areyousick.admin.core.question.domain.Question field kr.areyousick.admin.core.symptom.domain.SymptomQuestionId.question to java.lang.String
+	at java.base/jdk.internal.reflect.UnsafeFieldAccessorImpl.throwSetIllegalArgumentException(UnsafeFieldAccessorImpl.java:167) ~[na:na]
+	at java.base/jdk.internal.reflect.UnsafeFieldAccessorImpl.throwSetIllegalArgumentException(UnsafeFieldAccessorImpl.java:171) ~[na:na]
+	at java.base/jdk.internal.reflect.UnsafeObjectFieldAccessorImpl.set(UnsafeObjectFieldAccessorImpl.java:81) ~[na:na]
+
+```
+```java
+public class SymptomQuestionId implements Serializable {
+
+    private Symptom symptom;
+
+    private Question question;
+}
+```
+##### 위의 코드가 아래와 같이 바뀌어야 함
+```java
+public class SymptomQuestionId implements Serializable {
+
+    private String symptom;
+
+    private String question;
+```
+
