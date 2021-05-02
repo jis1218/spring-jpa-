@@ -924,6 +924,13 @@ create table tb_question_answer (
 
 ##### 차를 생성할 때 이름을 래퍼로 감싸고 이름 클래스 안에서 validation 처리를 하려다 보니 유효하지 않은 이름이 왔을 떄 어떻게 할 것인지 고민이 되었고 결국 exception을 날려주기로 하였음
 
+##### 차 이름을 검증하는 로직이 차 안에 있어야 하는지 아니면 Input값에 있어야 하는지 헷갈림
+
+```java
+    //TODO
+    // InputValidator를 만들어야 할 것 같음 - 숫자의 경우 범위를 정해줘야 함, 문자열 받는 경우에도 예외 처리
+    // NumberSetGenerator에 대한 리팩터링 필요
+```
 
 
 ##### 이런 에러가 뜬다. 왜? composite key를
