@@ -371,3 +371,9 @@ child1.setParent(parent); //Child table에 insert 됨
 ##### 10 tips for choosing between a surrogate and natural primary key
 ##### https://www.techrepublic.com/blog/10-things/10-tips-for-choosing-between-a-surrogate-and-natural-primary-key/
 ##### https://www.inflearn.com/questions/27694
+
+##### 현재 상황... 부모 클래스인 Keyword가 있고 자식 클래스인 MainKeyword, PartKeyword, SubKeyword가 있는 상황
+##### 한 Repository에서 이걸 다 처리할 수 있는지 확인하였으나 불가능한 것 같다. Save는 가능하다.
+##### 하지만 Select 해서 불러오는 것은 안된다.
+##### 스프링 Reference에 보니 각각의 Repo를 만들어서 해야 하는데 아래 링크를 참고하자
+##### https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query.spel-expressions
