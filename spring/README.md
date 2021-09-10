@@ -958,3 +958,24 @@ public class SymptomQuestionId implements Serializable {
     private String question;
 ```
 
+##### 직렬화(Serialization), 역직렬화(Deserialization)
+##### 직렬화 - 객체에 저장된 데이터를 I/O 스트림에 쓰기위해 연속적인 데이터로 변환(object -> byte)
+##### 역직렬화 - I/O 스트림에서 데이터를 읽어서 객체로 만듦(byte -> object)
+##### https://nesoy.github.io/articles/2018-04/Java-Serialize
+##### https://atoz-develop.tistory.com/entry/JAVA%EC%9D%98-%EA%B0%9D%EC%B2%B4-%EC%A7%81%EB%A0%AC%ED%99%94Serialization%EC%99%80-JSON-%EC%A7%81%EB%A0%AC%ED%99%94
+
+##### com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct instance of `kr.areyousick.admin.core.medical.question.dto.QuestionResponse` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
+##### https://dundung.tistory.com/202
+##### https://www.toolsqa.com/rest-assured/deserialize-json-response/
+##### 아래 코드는 Java Reflection을 이용해 동작한다.
+```java
+        assertThat(createResponse.jsonPath().getObject(jsonPath, QuestionResponse.class).getQuestionName()).isEqualTo("질문입니다");    }
+```
+##### 그런데 QuestionResponse.class에 기본생성자가 없으면 에러가 난다.
+```
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct instance of `kr.areyousick.admin.core.medical.question.dto.QuestionResponse` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
+```
+##### 그 이유는 Java Reflection이 가져올 수 없는 정보 중 하나가 생성자의 인자 정보들이므로 기본 생성자가 없으면 Java Reflection이 객체를 생성할 수 없다.
+##### https://da-nyee.github.io/posts/woowa-course-why-the-default-constructor-is-needed/
+##### https://1-7171771.tistory.com/123?category=865872
+
