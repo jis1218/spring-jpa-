@@ -979,3 +979,5 @@ com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct 
 ##### https://da-nyee.github.io/posts/woowa-course-why-the-default-constructor-is-needed/
 ##### https://1-7171771.tistory.com/123?category=865872
 
+##### Spring Data Jpa는 실행 시점(런타임)에 동적으로 구현체를 할당한다
+
