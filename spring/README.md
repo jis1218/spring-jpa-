@@ -979,3 +979,6 @@ com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct 
 ##### https://da-nyee.github.io/posts/woowa-course-why-the-default-constructor-is-needed/
 ##### https://1-7171771.tistory.com/123?category=865872
 
+##### @Table vs @Entity Annotation
+##### https://walkingtechie.blogspot.com/2019/06/difference-between-entity-and-table.html
+
