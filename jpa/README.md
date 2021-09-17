@@ -377,3 +377,9 @@ child1.setParent(parent); //Child table에 insert 됨
 ##### 하지만 Select 해서 불러오는 것은 안된다.
 ##### 스프링 Reference에 보니 각각의 Repo를 만들어서 해야 하는데 아래 링크를 참고하자
 ##### https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query.spel-expressions
+
+##### jpql이란? rorcpwlgidznjfl... 테이블이 아닌 객체를 검색하는 객체지향 쿼리, SQL을 추상화하였음
+##### https://victorydntmd.tistory.com/205
+
+##### @Entity와 @Table의 차이...
+##### https://walkingtechie.blogspot.com/2019/06/difference-between-entity-and-table.html
