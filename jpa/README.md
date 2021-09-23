@@ -383,3 +383,6 @@ child1.setParent(parent); //Child table에 insert 됨
 
 ##### @Entity와 @Table의 차이...
 ##### https://walkingtechie.blogspot.com/2019/06/difference-between-entity-and-table.html
+
+##### 우아한 형제들의 Querydsl 사용법
+##### https://velog.io/@youngerjesus/%EC%9A%B0%EC%95%84%ED%95%9C-%ED%98%95%EC%A0%9C%EB%93%A4%EC%9D%98-Querydsl-%ED%99%9C%EC%9A%A9%EB%B2%95
