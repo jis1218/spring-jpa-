@@ -982,3 +982,5 @@ com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct 
 ##### @Table vs @Entity Annotation
 ##### https://walkingtechie.blogspot.com/2019/06/difference-between-entity-and-table.html
 
+##### jasypt 관련
+##### https://luvstudy.tistory.com/67
