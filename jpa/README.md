@@ -386,3 +386,15 @@ child1.setParent(parent); //Child table에 insert 됨
 
 ##### 우아한 형제들의 Querydsl 사용법
 ##### https://velog.io/@youngerjesus/%EC%9A%B0%EC%95%84%ED%95%9C-%ED%98%95%EC%A0%9C%EB%93%A4%EC%9D%98-Querydsl-%ED%99%9C%EC%9A%A9%EB%B2%95
+
+##### open-session-in-view 란?
+##### https://gracelove91.tistory.com/100
+##### true일 경우 영속성 컨텍스트가 트랜잭션 범위를 넘어선 레이어까지 살아있음
+
+##### query가 default_batch_size 만큼 나가지 않는 이유...
+##### https://www.inflearn.com/questions/34469
+
+##### JPA와 MyBatis 함께 사용하기...
+##### JPA를 사용하려면 JpaTransactionManager를 스프링 빈으로 등록해야 함
+##### https://www.inflearn.com/questions/12499
+#####
