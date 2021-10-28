@@ -990,3 +990,6 @@ com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct 
 
 ##### @RequestBody DTO가 NoArgsContstructor가 필요한 이유
 ##### https://velog.io/@conatuseus/RequestBody%EC%97%90-%EC%99%9C-%EA%B8%B0%EB%B3%B8-%EC%83%9D%EC%84%B1%EC%9E%90%EB%8A%94-%ED%95%84%EC%9A%94%ED%95%98%EA%B3%A0-Setter%EB%8A%94-%ED%95%84%EC%9A%94-%EC%97%86%EC%9D%84%EA%B9%8C-3-idnrafiw
+
+##### @Builder 관련하여 읽어봐야 함
+##### https://yuja-kong.tistory.com/99
