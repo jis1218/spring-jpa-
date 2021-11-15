@@ -993,3 +993,26 @@ com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct 
 
 ##### @Builder 관련하여 읽어봐야 함
 ##### https://yuja-kong.tistory.com/99
+
+##### Bean life cycle
+##### https://www.geeksforgeeks.org/bean-life-cycle-in-java-spring/
+
+##### InitializingBean에 대해서...
+##### http://wonwoo.ml/index.php/post/1820
+##### 어떤 Bean을 DI 작업까지 마친다음 초기화할 작업이 있다면...
+##### InitializingBean 인터페이스로 afterPropertiesSet()을 구현해주면 된다.
+##### 즉 InitializingBean 인터페이스는 모든 properties가 set 된 후 어떤 메서드를 실행시키고 싶을 때 사용...
+##### 그의 대한 대안으로는 XML bean definition에 정의해주는 방법이 있다.
+##### @PostConstruct과 차이는 무엇일까??
+##### @Bean(initMethod)도 있는 듯 하네...
+
+##### @PostConstruct과 init-method의 차이점
+##### https://newbedev.com/spring-postconstruct-vs-init-method-attribute
+##### 순서는 @PostConstruct -> afterPropertiesSet -> init-method
+##### @PostConstruct는 spring의 영역이 아니라 javax package라고 한다.
+
+##### Spring Session
+##### https://brunch.co.kr/@springboot/491
+
+##### UsernamePasswordAuthenticationFilter는 언제 사용하는가??
+##### Spring Boot 기반의 HttpSecurity를 설정하는 코드에서 http.formLogin(); 을 사용하면 기본적으로 UsernamePasswordAuthenticationFilter를 사용한다.
