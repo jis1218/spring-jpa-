@@ -1016,3 +1016,7 @@ com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct 
 
 ##### UsernamePasswordAuthenticationFilter는 언제 사용하는가??
 ##### Spring Boot 기반의 HttpSecurity를 설정하는 코드에서 http.formLogin(); 을 사용하면 기본적으로 UsernamePasswordAuthenticationFilter를 사용한다.
+
+
+##### Spring Security Filter의 전반적인 설명
+##### https://k3068.tistory.com/88
