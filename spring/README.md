@@ -1020,3 +1020,18 @@ com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct 
 
 ##### Spring Security Filter의 전반적인 설명
 ##### https://k3068.tistory.com/88
+
+##### @SpringBootTest에 관하여...
+##### https://goddaehee.tistory.com/211
+
+##### 분산 트랜잭션 구현
+##### https://www.popit.kr/rest-%EA%B8%B0%EB%B0%98%EC%9D%98-%EA%B0%84%EB%8B%A8%ED%95%9C-%EB%B6%84%EC%82%B0-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EA%B5%AC%ED%98%84-1%ED%8E%B8/
+
+##### 마이크로서비스와 오케스트레이션
+##### https://yangbongsoo.gitbook.io/study/undefined-1/msa
+##### API에 대한 인증이나 로깅과 같은 공통 기능은 서비스 컴포넌트 별로 중복 개발해야 할 수도 있기 때문에 API Gateway에서 이러한 공통 기능을 처리하면 된다...
+##### 마이크로서비스 아키텍쳐의 문제점
+##### 1. 성능 - 각각의 서비스를 호출할 때 json -> object로 변환하는 Marshalling overhead가 발생
+##### 2. 메모리 - 각각의 톰캣, 라이브러리, 어플리케이션 기동 메모리가 필요
+##### 3. 테스팅이 어렵다.
+##### 4. 트랜잭션 처리가 어렵다.
