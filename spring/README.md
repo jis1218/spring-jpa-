@@ -1035,3 +1035,6 @@ com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct 
 ##### 2. 메모리 - 각각의 톰캣, 라이브러리, 어플리케이션 기동 메모리가 필요
 ##### 3. 테스팅이 어렵다.
 ##### 4. 트랜잭션 처리가 어렵다.
+
+##### RestDoc Relaxed 쓰는 이유? -> 문서화 안한 필드가 있어도 테스트 통과시키기 위해서
+##### https://tram-devlog.tistory.com/entry/%EC%8A%A4%ED%94%84%EB%A7%81-%EA%B8%B0%EB%B0%98-REST-API-%EA%B0%9C%EB%B0%9C-KSUG-%EC%84%B8%EB%AF%B8%EB%82%98
