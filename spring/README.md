@@ -1038,3 +1038,51 @@ com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Cannot construct 
 
 ##### RestDoc Relaxed 쓰는 이유? -> 문서화 안한 필드가 있어도 테스트 통과시키기 위해서
 ##### https://tram-devlog.tistory.com/entry/%EC%8A%A4%ED%94%84%EB%A7%81-%EA%B8%B0%EB%B0%98-REST-API-%EA%B0%9C%EB%B0%9C-KSUG-%EC%84%B8%EB%AF%B8%EB%82%98
+
+##### UserDetail을 어떻게 Mocking 해서 사용할까?
+##### @WithUserDetails 또는 @WithMockUser를 사용하자
+##### https://stackoverflow.com/questions/15203485/spring-test-security-how-to-mock-authentication
+
+
+##### mockMvc test를 할 때 Spring Security Filter가 걸리지 않는다. 어떻게 해야하는가?
+##### https://kimyhcj.tistory.com/383
+##### mockMvc webAppContext 환경에 Spring Security Filter Chain을 추가해줘야 한다.
+```java
+DelegatingFilterProxy delegatingFilterProxy = new DelegatingFilterProxy();
+delegatingFilterProxy.init(
+		new MockFilterConfig(ctx.getServletContext(), BeanIds.SPRING_SECURITY_FILTER_CHAIN)
+);
+
+this.mockMvc = webAppContextSetup(ctx)
+		.apply(documentationConfiguration(restDocumentation)
+				.uris()
+				.withScheme("http")
+				.withHost("localhost")
+				.withPort(80)
+		)
+		// restDoc encoding
+		.alwaysDo(documentHandler)
+		.addFilters(
+				new CharacterEncodingFilter(UTF_8.name(), true),
+				delegatingFilterProxy
+		)
+		.build();
+```
+
+##### 하지만 spring 공식 문서에 더 잘 나와있따...
+##### https://docs.spring.io/spring-security/site/docs/4.2.x/reference/html/test-mockmvc.html
+```java
+@Before
+	public void setup() {
+		mvc = MockMvcBuilders
+				.webAppContextSetup(context)
+				.apply(springSecurity()) 1
+				.build();
+	}
+```
+
+##### authentication entry point 설정
+##### https://beemiel.tistory.com/11
+
+##### 어떻게 하면 JwtAuthenticationEntryPoint의 commence 메서드를 실행시킬 수 있는가?
+##### https://sas-study.tistory.com/362
