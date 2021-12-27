@@ -377,3 +377,24 @@ child1.setParent(parent); //Child table에 insert 됨
 ##### 하지만 Select 해서 불러오는 것은 안된다.
 ##### 스프링 Reference에 보니 각각의 Repo를 만들어서 해야 하는데 아래 링크를 참고하자
 ##### https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query.spel-expressions
+
+##### jpql이란? rorcpwlgidznjfl... 테이블이 아닌 객체를 검색하는 객체지향 쿼리, SQL을 추상화하였음
+##### https://victorydntmd.tistory.com/205
+
+##### @Entity와 @Table의 차이...
+##### https://walkingtechie.blogspot.com/2019/06/difference-between-entity-and-table.html
+
+##### 우아한 형제들의 Querydsl 사용법
+##### https://velog.io/@youngerjesus/%EC%9A%B0%EC%95%84%ED%95%9C-%ED%98%95%EC%A0%9C%EB%93%A4%EC%9D%98-Querydsl-%ED%99%9C%EC%9A%A9%EB%B2%95
+
+##### open-session-in-view 란?
+##### https://gracelove91.tistory.com/100
+##### true일 경우 영속성 컨텍스트가 트랜잭션 범위를 넘어선 레이어까지 살아있음
+
+##### query가 default_batch_size 만큼 나가지 않는 이유...
+##### https://www.inflearn.com/questions/34469
+
+##### JPA와 MyBatis 함께 사용하기...
+##### JPA를 사용하려면 JpaTransactionManager를 스프링 빈으로 등록해야 함
+##### https://www.inflearn.com/questions/12499
+#####
