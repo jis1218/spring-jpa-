@@ -1086,3 +1086,31 @@ this.mockMvc = webAppContextSetup(ctx)
 
 ##### 어떻게 하면 JwtAuthenticationEntryPoint의 commence 메서드를 실행시킬 수 있는가?
 ##### https://sas-study.tistory.com/362
+##### JwtAuthenticationEntryPoint는 ExceptionTranslationFilter에서 AuthenticationException을 잡아 실행이 되는데 기존 코드에서는 그냥 AuthenticationException만 던지다보니 Exception만 나고 프로그램이 종료되었다.
+```java
+if (tokenProvider.validateToken(jwt)) {
+	Authentication authentication = tokenProvider.getAuthentication(jwt);
+	SecurityContextHolder.getContext().setAuthentication(authentication);
+	log.debug("Security Context에 '{}' 인증 정보를 저장했습니다, uri: {}", authentication.getName(), requestURI);
+} else {
+	log.debug("유효한 JWT 토큰이 없습니다, uri: {}", requestURI);
+//            ((HttpServletResponse) servletResponse).setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+	((HttpServletResponse) servletResponse).setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+	throw new JwtAuthenticationException("유효한 토큰이 없습니다", new Throwable("message"));
+}
+```
+##### 그 이유는 기존 코드에서 filter가 다 돌지 않은 상태에서 Exception을 던졌기 때문이다.
+##### Filter를 다 돌려준 상태에서 Exception을 던져줘야 한다.
+```java
+if (tokenProvider.validateToken(jwt)) {
+	Authentication authentication = tokenProvider.getAuthentication(jwt);
+	SecurityContextHolder.getContext().setAuthentication(authentication);
+	log.debug("Security Context에 '{}' 인증 정보를 저장했습니다, uri: {}", authentication.getName(), requestURI);
+} else {
+	log.debug("유효한 JWT 토큰이 없습니다, uri: {}", requestURI);
+//            ((HttpServletResponse) servletResponse).setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+	((HttpServletResponse) servletResponse).setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+	filterChain.doFilter(servletRequest, servletResponse);
+	throw new JwtAuthenticationException("유효한 토큰이 없습니다", new Throwable("message"));
+}
+```
