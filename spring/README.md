@@ -1116,3 +1116,6 @@ if (tokenProvider.validateToken(jwt)) {
 	throw new JwtAuthenticationException("유효한 토큰이 없습니다", new Throwable("message"));
 }
 ```
+
+##### Java, method에 parameter 넘겨줄 때...
+https://www.refreshjava.com/java/call-by-value
